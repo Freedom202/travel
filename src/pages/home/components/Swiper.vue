@@ -20,7 +20,7 @@
 <script>
 export default {
     name: 'HomeSwiper',
-    //data: function()的简写    组件中使用data，data必须是一个函数
+    //data: function()的简写    子组件中使用data，data必须是一个函数
     data () {
         return {
             swiperOption: {
