@@ -10,10 +10,13 @@ import 'styles/reset.css'  //reset.css是基础样式设置，确保在各个浏
 import 'styles/border.css'
 import 'styles/iconfont.css'//因为在webpack.base.config.js中配置了路径，所以此时可以用此路径，不然要用以下路径
 //import './assets/styles/iconfont.css'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 
 
 Vue.config.productionTip = false
 fastClick.attach(document.body) //在body中使用 fastclick库
+Vue.use(VueAwesomeSwiper)
 
 /* eslint-disable no-new */
 new Vue({

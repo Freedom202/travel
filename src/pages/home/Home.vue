@@ -1,17 +1,20 @@
 <template>
     <div>
         <home-header></home-header>
+        <home-swiper></home-swiper>
     </div>
 </template>
 
 <script>
 import HomeHeader from './components/Header'  //引入局部组件
+import HomeSwiper from './components/Swiper'
 
 export default {
     name: 'Home',
     components: {   //引用局部组件
-        HomeHeader
+        HomeHeader,
         //或者 HomeHeader: HomeHeader
+        HomeSwiper
     }
 }
 </script>
