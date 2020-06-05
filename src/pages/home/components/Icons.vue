@@ -1,6 +1,6 @@
 <template>
     <div class="icons">
-        <swiper>
+        <swiper :options="swiperOption">
             <swiper-slide v-for="(page, index) of pages" :key="index"> 
 <!--key值最好不要用index，因为index是变量，变化后可能有问题，但是此处index不会变更，所以还好； 轮播页面由pages确定-->
                 <div 
@@ -19,54 +19,23 @@
 </template>
 
 <script>
+//使用axios传值，mock模拟数据
 export default {
     name: 'HomeIcons',
-
+    props: {
+        list: Array
+    },
     data () {
         return {
-            iconsList: [{
-                id: '0001',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-                desc: '景点门票景点门票景点门票景点门票'
-            },{
-                id: '0002',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
-                desc: '一日游'
-            },{
-                id: '0003',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/bd/9f7b9b2b60c1502.png',
-                desc: '踏青赏花'
-            },{
-                id: '0004',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/47/c2b659e048b11602.png',
-                desc: '主题乐园'
-            },{
-                id: '0005',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png',
-                desc: '深圳必游'
-            },{
-                id: '0006',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/27/dac2bcf9added702.png',
-                desc: '海滨广岛'
-            },{
-                id: '0007',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/ab/6f7d6e44963c9302.png',
-                desc: '泡温泉'
-            },{
-                id: '0008',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/b6/37560ece9c62b502.png',
-                desc: '城市观光'
-            },{
-                id: '0009',
-                imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
-                desc: '一日游'
-            }]
+            swiperOption: {
+                autoplay: false  //控制轮播图自动滚动，一般默认为false
+            }
         }
     },
     computed: {     //(计算属性，自带缓存机制）实现两页轮播
         pages () {
             const pages = []     //数组，从0开始，0即第一页
-            this.iconsList.forEach((item, index) => {   //forEach两个参数，循环项item和循环项对应的下标index
+            this.list.forEach((item, index) => {   //forEach两个参数，循环项item和循环项对应的下标index
                 const page = Math.floor(index / 8)
                 if (!pages[page]) {
                     pages[page] = []
@@ -76,6 +45,66 @@ export default {
             return pages
         }
     }
+
+
+
+
+    // export default {
+    //     name: 'HomeIcons',
+    // data () {
+    //     return {
+    //         iconsList: [{
+    //             id: '0001',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
+    //             desc: '景点门票景点门票景点门票景点门票'
+    //         },{
+    //             id: '0002',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
+    //             desc: '一日游'
+    //         },{
+    //             id: '0003',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/bd/9f7b9b2b60c1502.png',
+    //             desc: '踏青赏花'
+    //         },{
+    //             id: '0004',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/47/c2b659e048b11602.png',
+    //             desc: '主题乐园'
+    //         },{
+    //             id: '0005',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png',
+    //             desc: '深圳必游'
+    //         },{
+    //             id: '0006',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/27/dac2bcf9added702.png',
+    //             desc: '海滨广岛'
+    //         },{
+    //             id: '0007',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/ab/6f7d6e44963c9302.png',
+    //             desc: '泡温泉'
+    //         },{
+    //             id: '0008',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1803/b6/37560ece9c62b502.png',
+    //             desc: '城市观光'
+    //         },{
+    //             id: '0009',
+    //             imgUrl: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
+    //             desc: '一日游'
+    //         }]
+    //     }
+    // },
+    //     computed: {     //(计算属性，自带缓存机制）实现两页轮播
+    //     pages () {
+    //         const pages = []     //数组，从0开始，0即第一页
+    //         this.iconsList.forEach((item, index) => {   //forEach两个参数，循环项item和循环项对应的下标index
+    //             const page = Math.floor(index / 8)
+    //             if (!pages[page]) {
+    //                 pages[page] = []
+    //             }
+    //             pages[page].push(item)
+    //         })
+    //         return pages
+    //     }
+    // }
 }
 </script>
 
