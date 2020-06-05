@@ -6,7 +6,7 @@
             <img class="swiper-img" :src="item.imgUrl" />
         </swiper-slide>
     
-    <!-- Optional controls -->
+    <!-- Optional controls  /  slot向swiper传值，相当于插槽-->
     <div class="swiper-pagination"  slot="pagination"></div>
     <!--轮播图的左右箭头 
     <div class="swiper-button-prev" slot="button-prev"></div>
