@@ -7,11 +7,14 @@
             <span class="iconfont">&#xe60e;</span>
             输入城市\景点\游玩主题
         </div>
-        <div class="header-right">
-            {{this.city}}
-            <span class="iconfont arrow-icon">&#xe695;</span>
-            
-        </div>
+
+        <router-link to='/city'>
+            <div class="header-right">
+                {{this.city}}
+                <span class="iconfont arrow-icon">&#xe695;</span>   <!--&#xe695;为iconfont里的样式 ； arrow-icon为样式类名-->   
+            </div>
+        </router-link>
+
     </div>
 </template>
 
@@ -57,7 +60,7 @@ export default {
 
     .header
         display: flex   //Flex是Flexible Box的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性。设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。
-        line-height : .86rem
+        line-height : $headerHeight
         background: $bgColor    /*varibles.styl中的$bgColor*/
         color : #fff
 
@@ -83,6 +86,7 @@ export default {
             width: 1.24rem
             float: right   //如果没有定义.header-input则float: right不会生效
             text-align : center
+            color: #fff
             .arrow-icon
                 margin-left: -.04rem  //向左移2px，因为可能两个inline元素中有2px的间距（或者给父级设置font-size：0，然后给每个元素font-size：.24rem应该也可）
                 font-size: .28rem
