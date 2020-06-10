@@ -17,8 +17,17 @@
                         </div>
                 </div>
             </div>
-            <div class="area" v-for="(item, key) of cities" :key="key">    
+            <div 
+                class="area" 
+                v-for="(item, key) of cities" 
+                :key="key"
+                :ref="key"
+            >    
 <!--对象用v-for的方法，第二项是key不是index;  key值就用key，即A、B等，它确保不会重名，所以可行； 父级与子级key值重复没有关系，只要同级不重复就行-->
+<!--  1.ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上，就比如我们想访问子组件的一些数据和方法，就可以使用ref为子组件指定一个引用的id,调用方式为
+            const child = parent.$refs.id
+      2.一般来讲，获取DOM元素，需document.querySelector（".input1"）获取这个dom节点，然后在获取input1的值。但是用ref绑定之后，我们就不需要在获取dom节点了，直接在上面的input上绑定input1，然后$refs里面调用就行。然后在javascript里面这样调用：this.$refs.input1  这样就可以减少获取dom节点的消耗了.
+      即，ref是dom向组件传值的，refs是配套的，组件接收ref的传值-->
                 <div class="title border-topbottom">{{key}}</div>
                 <div class="item-list">    <!--或者用ul写-->
                     <div 
@@ -40,10 +49,22 @@ export default {
     name: 'CityList',
     props: {
         hot: Array,
-        cities: Object  //对象数据类型
+        cities: Object,  //对象数据类型
+        letter: String   //接收父组件City.vue的传值
     },
-    mounted () {   //生命周期函数，挂载
+    mounted() {   //生命周期函数，挂载
         this.scroll = new BScroll(this.$refs.wrapper)  //实例，要接收dom元素或dom选择器
+    },
+    watch: {         //监听器
+        letter() {
+            // console.log(this.letter)
+            if(this.letter){
+                const element = this.$refs[this.letter][0]   //element是循环输出的，得到的是一个数组，即element的类型是数组，但是csroll函数只能引用dom元素或者dom选择器类型,所以必须加"[0]"
+                            // refs-->通过为每个循环绑定ref ref的值对应的是每个key 也就是每个字母
+                            // [0]-->取到的是一个数组，具体的元素dom节点为数组的第一项
+                this.scroll.scrollToElement(element)  //scroll插件的一个方法，滚动到指定位置
+            }
+        }
     }
 }
 </script>

@@ -37,8 +37,8 @@ export default {
     },
     methods: {     //方法
         getHomeInfo () {
-            axios.get('/api/index.json')     //在config下的index.js中的proxyTable中已经进行修改了
-                .then(this.getHomeInfoSucc)
+            axios.get('/api/index.json')     //在config下的index.js中的proxyTable中已经进行修改了、、、返回的是一个promise对象（代表了未来将要发生的事件），后面使用then
+                .then(this.getHomeInfoSucc)   //获取成功执行getHomeInfoSucc函数
         },
         getHomeInfoSucc (res) {
             res = res.data
@@ -53,7 +53,7 @@ export default {
         }
     },
     mounted () {   //vue的生命周期函数，挂载
-        this.getHomeInfo()
+        this.getHomeInfo()  //页面挂载好执行这个方法ajax获取数据
     },
 }
 </script>

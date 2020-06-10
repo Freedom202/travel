@@ -2,8 +2,15 @@
     <div>
         <city-header></city-header>
         <city-search></city-search>
-        <city-list :cities="allcities" :hot="hotCities"></city-list>
-        <city-alphabet :cities="allcities"></city-alphabet>
+        <city-list 
+            :cities="allcities"
+            :hot="hotCities"
+            :letter="letter"
+        ></city-list>
+        <city-alphabet 
+            :cities="allcities"
+            @change="handleLetterChange"
+        ></city-alphabet>   <!--父组件接收子组件Alphabet.vue的传值-->
     </div>
 </template>
 
@@ -24,8 +31,9 @@ export default {
     },
     data () {
         return {
-            allcities: {},
-            hotCities: []
+            allcities: {},   //对象
+            hotCities: [],   //数组
+            letter: ''       //值
         }
     },
     methods: {
@@ -40,7 +48,12 @@ export default {
                 this.allcities = data.cities
                 this.hotCities = data.hotCities
             }
+        },
+        handleLetterChange (letter) {
+            this.letter = letter
+            // console.log(letter)
         }
+
     },
     mounted () {
         this.getCityInfo()
