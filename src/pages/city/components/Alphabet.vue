@@ -1,19 +1,15 @@
 <template>
     <ul class="list">
-        <li class="item">A</li>
-        <li class="item">A</li>
-        <li class="item">A</li>
-        <li class="item">A</li>
-        <li class="item">A</li>
-        <li class="item">A</li>
-        <li class="item">A</li>
-        <li class="item">A</li>
+        <li class="item" v-for="(item, key) of cities" :key="key">{{key}}</li>   <!--需要循环的是li而不是ul，key代表A,B,C等-->
     </ul>
 </template>
 
 <script>
 export default {
-    name: 'CityAlphabet'
+    name: 'CityAlphabet',
+    props: {
+        cities: Object 
+    }
 }
 </script>
 

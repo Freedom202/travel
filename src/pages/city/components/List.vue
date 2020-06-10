@@ -12,56 +12,22 @@
             <div class="area">
                 <div class="title border-topbottom">热门城市</div>
                     <div class="button-list">
-                        <div class="button-wrapper">
-                            <div class="button">北京</div>
-                        </div>
-                        <div class="button-wrapper">
-                            <div class="button">北京</div>
-                        </div>
-                        <div class="button-wrapper">
-                            <div class="button">北京</div>
-                        </div>
-                        <div class="button-wrapper">
-                            <div class="button">北京</div>
-                        </div>
-                        <div class="button-wrapper">
-                            <div class="button">北京</div>
+                        <div class="button-wrapper" v-for="item of hot" :key="item.id">
+                            <div class="button">{{item.name}}</div>
                         </div>
                 </div>
             </div>
-            <div class="area">
-                <div class="title border-topbottom">A</div>
+            <div class="area" v-for="(item, key) of cities" :key="key">    
+<!--对象用v-for的方法，第二项是key不是index;  key值就用key，即A、B等，它确保不会重名，所以可行； 父级与子级key值重复没有关系，只要同级不重复就行-->
+                <div class="title border-topbottom">{{key}}</div>
                 <div class="item-list">    <!--或者用ul写-->
-                    <div class="item border-bottom">阿拉尔</div>   <!--border-bottom添加下边框，只是默认颜色很浅-->
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                </div>
-                <div class="title border-topbottom">A</div>
-                <div class="item-list">    <!--或者用ul写-->
-                    <div class="item border-bottom">阿拉尔</div>   <!--border-bottom添加下边框，只是默认颜色很浅-->
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                </div>
-                <div class="title border-topbottom">A</div>
-                <div class="item-list">    <!--或者用ul写-->
-                    <div class="item border-bottom">阿拉尔</div>   <!--border-bottom添加下边框，只是默认颜色很浅-->
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
-                    <div class="item border-bottom">阿拉尔</div>
+                    <div 
+                        class="item border-bottom"
+                        v-for="innerItem of item"
+                        :key="innerItem.id"
+                    >
+                    {{innerItem.name}}
+                    </div>   <!--border-bottom添加下边框，只是默认颜色很浅-->
                 </div>
             </div>
         </div>
@@ -72,6 +38,10 @@
 import BScroll from 'better-scroll'  //随着手指滑动滚动
 export default {
     name: 'CityList',
+    props: {
+        hot: Array,
+        cities: Object  //对象数据类型
+    },
     mounted () {   //生命周期函数，挂载
         this.scroll = new BScroll(this.$refs.wrapper)  //实例，要接收dom元素或dom选择器
     }
