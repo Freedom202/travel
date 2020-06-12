@@ -28,6 +28,7 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),  //即表示@代表的src目录
       'styles': resolve('src/assets/styles'),
+      'common': resolve('src/common')
     }
   },
   module: {
