@@ -9,6 +9,7 @@
                     class="search-item border-bottom" 
                     v-for="item of list" 
                     :key="item.id"
+                    @click="handleCityClick(item.name)"
                 >
                     {{item.name}}
                 </li>
@@ -25,6 +26,7 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import { mapMutations } from 'vuex'
 export default {
     name: 'CitySearch',
     props: {
@@ -36,6 +38,16 @@ export default {
             list: [],
             timer: null
         }
+    },
+    methods: {
+        handleCityClick (city) {
+            //this.$store.dispatch('changeCity', city)  //vuex官方文档，dispatch
+            //alert(city)
+            //this.$store.commit('changeCity', city)
+            this.changeCity(city)
+            this.$router.push('/')  //跳转到首页。vue路由的编程式导航
+        },
+         ...mapMutations(['changeCity'])
     },
     computed: {    //判断list长度是否为空、、、最好把逻辑运算都放在script里，不要放在模板（template）里
         hasNoData() {
@@ -66,7 +78,9 @@ export default {
         }
     },
     mounted () {  //生命周期钩子，挂载
-        this.scroll = new Bscroll(this.$refs.search)    //实现触摸滚动
+        this.scroll = new Bscroll(this.$refs.search,{
+            click: true
+        })    //实现触摸滚动
     }
 }
 </script>

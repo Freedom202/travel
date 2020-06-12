@@ -10,6 +10,7 @@
 
         <router-link to='/city'>
             <div class="header-right">
+                <!-- {{this.$store.state.city}} 因为用mapState映射了数据，所以不用这么麻烦了-->
                 {{this.city}}
                 <span class="iconfont arrow-icon">&#xe695;</span>   <!--&#xe695;为iconfont里的样式 ； arrow-icon为样式类名-->   
             </div>
@@ -19,10 +20,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     name: 'HomeHeader',
-    props: {   //从父组件接收数据
-        city: String
+    // props: {   //从父组件接收数据
+    //     city: String
+    // }
+    computed: {    //计算属性
+        ...mapState(['city'])  
+//mapState把vuex中的city映射到computed中的city中.['city']表示是一个数组
     }
 }
 </script>
@@ -83,7 +89,8 @@ export default {
             color: #ccc
 
         .header-right
-            width: 1.24rem
+            min-width: 1.04rem    //最小为1.04rem
+            padding 0 .1rem 
             float: right   //如果没有定义.header-input则float: right不会生效
             text-align : center
             color: #fff

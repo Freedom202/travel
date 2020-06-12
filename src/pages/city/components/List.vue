@@ -5,14 +5,20 @@
                 <div class="title border-topbottom">当前城市</div>
                 <div class="button-list">
                     <div class="button-wrapper">
-                        <div class="button">北京</div>
+                        <div class="button">{{this.currentCity}}</div>
+                        <!-- <div class="button">{{this.$store.state.city}}</div> 因为用mapState映射了数据，所以不用这么麻烦了-->
                     </div>
                 </div>
             </div>
             <div class="area">
                 <div class="title border-topbottom">热门城市</div>
                     <div class="button-list">
-                        <div class="button-wrapper" v-for="item of hot" :key="item.id">
+                        <div 
+                            class="button-wrapper" 
+                            v-for="item of hot" 
+                            :key="item.id"
+                            @click="handleCityClick(item.name)"
+                        >
                             <div class="button">{{item.name}}</div>
                         </div>
                 </div>
@@ -34,6 +40,7 @@
                         class="item border-bottom"
                         v-for="innerItem of item"
                         :key="innerItem.id"
+                        @click="handleCityClick(innerItem.name)"
                     >
                     {{innerItem.name}}
                     </div>   <!--border-bottom添加下边框，只是默认颜色很浅-->
@@ -45,6 +52,7 @@
 
 <script>
 import BScroll from 'better-scroll'  //随着手指滑动滚动
+import { mapState, mapMutations } from 'vuex'
 export default {
     name: 'CityList',
     props: {
@@ -52,8 +60,21 @@ export default {
         cities: Object,  //对象数据类型
         letter: String   //接收父组件City.vue的传值
     },
-    mounted() {   //生命周期函数，挂载
-        this.scroll = new BScroll(this.$refs.wrapper)  //实例，要接收dom元素或dom选择器
+    methods: {
+        handleCityClick (city) {
+            //this.$store.dispatch('changeCity', city)  //vuex官方文档，dispatch
+            //alert(city)
+           //用了vuex传值，就可以不这么写，而是用下面的方法 this.$store.commit('changeCity', city)
+           this.changeCity(city)
+           this.$router.push('/')  //跳转到首页。vue路由的编程式导航
+        },
+        ...mapMutations(['changeCity'])   //把mapMutations中的changeCity映射到这个组件里叫changeCity的方法里
+    },
+    computed: {    //计算属性
+        ...mapState({
+                currentCity: 'city'   //映射vuex中的city取名为currentCity，且为对象类型
+        })
+//        ...mapState(['city'])   //['city']为数组。mapState把vuex中的city映射到computed中的city中
     },
     watch: {         //监听器
         letter() {
@@ -65,6 +86,11 @@ export default {
                 this.scroll.scrollToElement(element)  //scroll插件的一个方法，滚动到指定位置
             }
         }
+    },
+    mounted() {   //生命周期函数，挂载
+        this.scroll = new BScroll(this.$refs.wrapper,{
+            click: true    //better_scroll中默认click为false，所以必须修改为true，不然会click无效
+        })  //实例，要接收dom元素或dom选择器
     }
 }
 </script>

@@ -12,6 +12,7 @@ import 'styles/iconfont.css'//因为在webpack.base.config.js中配置了路径�
 //import './assets/styles/iconfont.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
+import store from './store/index.js'
 
 
 Vue.config.productionTip = false
@@ -22,6 +23,7 @@ Vue.use(VueAwesomeSwiper)
 new Vue({
   el: '#app',
   router,
+  store,   //即store: 'store'，因为键和值相同，所以简写
   components: { App },
   template: '<App/>'
 })
