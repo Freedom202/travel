@@ -15,6 +15,7 @@ import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekend from './components/Weekend'
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 export default {
     name: 'Home',
@@ -31,12 +32,16 @@ export default {
             swiperList: [],
             iconList: [],
             recommendList: [],
-            weekendList: []
+            weekendList: [],
+            lastCity: ''
         }
+    },
+    computed: {
+        ...mapState(['city'])
     },
     methods: {     //方法
         getHomeInfo () {
-            axios.get('/api/index.json')     //在config下的index.js中的proxyTable中已经进行修改了、、、返回的是一个promise对象（代表了未来将要发生的事件），后面使用then
+            axios.get('/api/index.json?city=' + this.city)     //在config下的index.js中的proxyTable中已经进行修改了、、、返回的是一个promise对象（代表了未来将要发生的事件），后面使用then
                 .then(this.getHomeInfoSucc)   //获取成功执行getHomeInfoSucc函数
         },
         getHomeInfoSucc (res) {
@@ -50,9 +55,17 @@ export default {
             }
         }
     },
-    mounted () {   //vue的生命周期函数，挂载
+    mounted () {   //vue的生命周期函数，挂载(初次挂载会显示)
         this.getHomeInfo()  //页面挂载好执行这个方法ajax获取数据
+        this.lastCity = this.city   //将上一个页面（city）用lastCity保存
     },
+    activated () {   //当页面重新被显示的时候执行
+        //console.log('ac')
+        if (this.lastCity !== this.city ) {
+            this.lastCity = this.city
+            this.getHomeInfo()
+        }
+    }
 }
 </script>
 

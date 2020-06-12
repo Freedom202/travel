@@ -12,6 +12,7 @@
             <div class="header-right">
                 <!-- {{this.$store.state.city}} 因为用mapState映射了数据，所以不用这么麻烦了-->
                 {{this.city}}
+                <!-- {{this.doubleCity}} -->
                 <span class="iconfont arrow-icon">&#xe695;</span>   <!--&#xe695;为iconfont里的样式 ； arrow-icon为样式类名-->   
             </div>
         </router-link>
@@ -21,6 +22,7 @@
 
 <script>
 import { mapState } from 'vuex'
+// import { mapState,mapGetters } from 'vuex'
 export default {
     name: 'HomeHeader',
     // props: {   //从父组件接收数据
@@ -29,6 +31,7 @@ export default {
     computed: {    //计算属性
         ...mapState(['city'])  
 //mapState把vuex中的city映射到computed中的city中.['city']表示是一个数组
+        // ...mapGetters(['doubleCity'])
     }
 }
 </script>

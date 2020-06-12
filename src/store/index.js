@@ -13,5 +13,10 @@ export default new Vuex.Store({
     //        ctx.commit('changeCity', city)
     //     }
     // },
+    // getters: {    //类似于计算属性。在home/header.vue中header-right使用
+    //     doubleCity (state) {
+    //         return state.city + ' ' + state.city
+    //     }
+    // },
     mutations   //mutations: mutations
 })
