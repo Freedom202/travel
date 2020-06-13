@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="banner">
+        <div class="banner" @click="handleBannerClick">
             <img class="banner-img" src="//img1.qunarzz.com/sight/p0/201307/18/f25ac054eec3804dc8d65eac.jpg_600x330_039a22c0.jpg"/>
             <div class="banner-info">
                 <div class="banner-title"> 
@@ -12,7 +12,11 @@
                 </div>
             </div>
         </div>
-        <common-gallary></common-gallary>
+        <common-gallary 
+            :imgs="imgs" 
+            v-show="showGallary"
+            @close="handleGallaryClose"
+        ></common-gallary>
     </div>
 </template>
 
@@ -20,6 +24,20 @@
 import CommonGallary from 'common/gallary/Gallary'
 export default {
     name: 'DetailBanner',
+    data () {
+        return {     //return一个对象
+            showGallary: false,
+            imgs: ['http://img1.qunarzz.com/sight/p0/201404/23/04b92c99462687fa1ba45c1b5ba4ad77.jpg_800x800_70debc93.jpg' , 'http://img1.qunarzz.com/sight/p0/1709/76/7691528bc7d7ad3ca3.img.png_800x800_9ef05ee7.png']
+        }
+    },
+    methods: {
+        handleBannerClick() {
+            this.showGallary = true
+        },
+        handleGallaryClose() {   //点击页面返回上一页
+            this.showGallary = false
+        }
+    },
     components: {
         CommonGallary
     }

@@ -31,7 +31,7 @@ export default {
             swiperOption: {
                 autoplay: true,   //控制轮播图自动滚动，一般默认为false
                 pagination: {
-                    el: '.swiper-pagination'
+                    el: '.swiper-pagination',  //swiper5官网    https://www.swiper.com.cn/api/pagination/299.html
                 },
                 loop: true    //实现左右无缝循环轮播
              },
