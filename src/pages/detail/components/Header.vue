@@ -35,6 +35,7 @@ export default {
     methods: {
         handleScroll() { 
             //console.log(document.documentElement.scrollTop)
+            //console.log('scroll')
             const top = document.documentElement.scrollTop
             //console.log(top)
             if(top > 60) {
@@ -51,10 +52,10 @@ export default {
             }
         }
     },
-    mounted () {
+    activated () {   //页面展示的时候绑定scroll事件
         window.addEventListener('scroll', this.handleScroll)
     },
-    unmounted () {
+    deactivated () {    //页面隐藏或者换页的时候解除scroll事件
         window.removeEventListener('scroll', this.handleScroll)
     }
 }
@@ -79,6 +80,7 @@ export default {
             font-size .4rem
 
     .header-fixed
+        z-index 2
         position absolute
         left 0
         right 0
