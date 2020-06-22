@@ -21,7 +21,7 @@ export default new Router({    //路由配置
       component: Detail
     }],
     scrollBehavior (to, from, savedPosition) {  //路由滚动https://router.vuejs.org/zh/guide/advanced/scroll-behavior.html#异步滚动
-      return { x: 0, y: 0 }
+      return { x: 0, y: 0 }  //每次都在页面最顶端
     }
 })
 
