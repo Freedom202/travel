@@ -19,8 +19,12 @@ export default new Router({    //路由配置
       path: '/detail/:id',   //动态路由，即后面可以带一个参数，参数放在id中
       name: 'Detail',
       component: Detail
-    }]
+    }],
+    scrollBehavior (to, from, savedPosition) {  //路由滚动https://router.vuejs.org/zh/guide/advanced/scroll-behavior.html#异步滚动
+      return { x: 0, y: 0 }
+    }
 })
+
 
 
 
