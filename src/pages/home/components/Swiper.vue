@@ -58,7 +58,7 @@ export default {
         background #fff !important     //使样式不受scoped影响，可以穿透到别的组件，从wrapper到swiper
 
     .wrapper
-        overflow: hidden
+        overflow: hidden     //隐藏多余
         width: 100%
         height: 0
         padding-bottom: 31.25%  //图片宽高比自适应：保证高宽比（200/750）始终是26.67

@@ -17,11 +17,12 @@
             v-for="item of letters" 
             :key="item"
             :ref="item"
-            @touchstart="handleTouchStart"
+            @touchstart.prevent="handleTouchStart"
             @touchmove="handleTouchMove"
             @touchend="handleTouchEnd"
             @click="handleLetterClick"
         >
+        <!-- .prevent为事件修饰符，可以阻止touchstart的默认行为-->
         {{item}}
         </li>
     </ul>
